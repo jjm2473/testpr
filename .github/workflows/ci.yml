@@ -1,0 +1,31 @@
+name: iStore Upload
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'bin/packages/**'
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: iStore Upload
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+
+      - name: Initialization environment
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo timedatectl set-timezone "$TZ"
+
+      - name: New Pending
+        run: git push origin pending
