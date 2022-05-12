@@ -28,4 +28,4 @@ jobs:
           sudo timedatectl set-timezone "$TZ"
 
       - name: New Pending
-        run: git push origin pending
+        run: git push origin HEAD:pending
